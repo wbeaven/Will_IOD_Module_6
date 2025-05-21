@@ -1,3 +1,4 @@
+import { useState } from "react";
 import SingleCat from "./SingleCat";
 
 const cats = [
@@ -10,19 +11,39 @@ const cats = [
     { id: "7", name: "Tiger", latinName: "Panthera tigris" },
 ];
 
-const catList = cats.map((cat) => (
-    <SingleCat
-        key={cat.id}
-        name={cat.name}
-        latin={cat.latinName}
-        foo={`./public/cat${cat.id}.png`}
-    />
-));
+function mapArray(arr) {
+    return arr.map((cat) => (
+        <SingleCat
+            key={cat.id}
+            name={cat.name}
+            latin={cat.latinName}
+            image={`./cat${cat.id}.png`}
+        />
+    ));
+}
+
+const originalOrder = mapArray(cats);
+
+const reverseOrder = mapArray([...cats].reverse());
+
+const filterOrder = mapArray(
+    [...cats].filter((cat) => cat.latinName.toLocaleLowerCase().includes("panthera"))
+);
 
 function BigCats() {
+    const [order, setOrder] = useState(originalOrder);
+    const handleOrder = () => {
+        let newOrder;
+        if (order === originalOrder) newOrder = reverseOrder;
+        else if (order === reverseOrder) newOrder = filterOrder;
+        else if (order === filterOrder) newOrder = originalOrder;
+        setOrder(newOrder);
+    };
+
     return (
         <>
-            <ul>{catList}</ul>
+            <button onClick={handleOrder}>Sort</button>
+            <ul>{order}</ul>
         </>
     );
 }

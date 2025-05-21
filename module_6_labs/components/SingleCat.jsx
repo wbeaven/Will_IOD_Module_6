@@ -1,8 +1,8 @@
-function SingleCat({ name, latin, foo }) {
+function SingleCat({ name, latin, image }) {
     return (
         <>
             <li>
-                {name}, {latin} <img src={foo} alt='big cat' width={"40px"} />
+                {name}, {latin} <img src={image} alt='big cat' width={"40px"} />
             </li>
         </>
     );

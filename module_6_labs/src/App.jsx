@@ -1,7 +1,8 @@
-import { useState } from "react";
 import "./App.css";
 import Greeting from "../components/greeting";
 import BigCats from "../components/BigCats";
+import Emoji from "../components/Emoji";
+import BirthdayTranslator from "../components/BirthdayTranslator";
 
 function App() {
     return (
@@ -12,6 +13,8 @@ function App() {
             <Greeting name='Paige' />
             <Greeting />
             <BigCats />
+            <Emoji />
+            <BirthdayTranslator />
         </>
     );
 }
