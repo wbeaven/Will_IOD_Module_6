@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SingleCat from "./SingleCat";
+import AddCatForm from "./AddCatForm";
 
 const cats = [
     { id: "1", name: "Cheetah", latinName: "Acinonyx jubatus" },
@@ -42,8 +43,11 @@ function BigCats() {
 
     return (
         <>
-            <button onClick={handleOrder}>Sort</button>
+            <button className='my-button' onClick={handleOrder}>
+                Sort
+            </button>
             <ul>{order}</ul>
+            <AddCatForm />
         </>
     );
 }

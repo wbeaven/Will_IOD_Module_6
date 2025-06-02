@@ -3,6 +3,8 @@ import Greeting from "../components/greeting";
 import BigCats from "../components/BigCats";
 import Emoji from "../components/Emoji";
 import BirthdayTranslator from "../components/BirthdayTranslator";
+import LoginForm from "../components/LoginForm";
+import AddCatForm from "../components/AddCatForm";
 
 function App() {
     return (
@@ -13,8 +15,10 @@ function App() {
             <Greeting name='Paige' />
             <Greeting />
             <BigCats />
+            {/* <AddCatForm /> */}
             <Emoji />
             <BirthdayTranslator />
+            <LoginForm />
         </>
     );
 }

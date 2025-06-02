@@ -17,11 +17,17 @@ function BirthdayTranslator() {
 
     return (
         <div className='BirthdayTranslator componentBox'>
-            <button onClick={() => handleChangeLanguage("english")}>English</button>
+            <button className='my-button' onClick={() => handleChangeLanguage("english")}>
+                English
+            </button>
 
-            <button onClick={() => handleChangeLanguage("german")}>German</button>
+            <button className='my-button' onClick={() => handleChangeLanguage("german")}>
+                German
+            </button>
 
-            <button onClick={() => handleChangeLanguage("spanish")}>Spanish</button>
+            <button className='my-button' onClick={() => handleChangeLanguage("spanish")}>
+                Spanish
+            </button>
             <h3>
                 {currentPhrase.phrase}! ({currentPhrase.lang})
             </h3>

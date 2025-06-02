@@ -18,12 +18,20 @@ function Emoji() {
 
     return (
         <>
-            <button onClick={() => setMood("😔")}>Stub Toe</button>
-            <button onClick={() => setMood("😃")}>Eat Cake</button>
-            <button onClick={() => setMood("😴")}>Sleep</button>
+            <button className='my-button' onClick={() => setMood("😔")}>
+                Stub Toe
+            </button>
+            <button className='my-button' onClick={() => setMood("😃")}>
+                Eat Cake
+            </button>
+            <button className='my-button' onClick={() => setMood("😴")}>
+                Sleep
+            </button>
             <h1>{mood}</h1>
 
-            <button onClick={handleTime}>Progress Time</button>
+            <button className='my-button' onClick={handleTime}>
+                Progress Time
+            </button>
             <h1>{time}</h1>
         </>
     );
