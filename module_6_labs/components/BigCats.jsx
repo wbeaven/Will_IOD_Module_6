@@ -2,43 +2,32 @@ import { useState } from "react";
 import SingleCat from "./SingleCat";
 import AddCatForm from "./AddCatForm";
 
-const cats = [
-    { id: "1", name: "Cheetah", latinName: "Acinonyx jubatus" },
-    { id: "2", name: "Cougar", latinName: "Puma concolor" },
-    { id: "3", name: "Jaguar", latinName: "Panthera onca" },
-    { id: "4", name: "Leopard", latinName: "Panthera pardus" },
-    { id: "5", name: "Lion", latinName: "Panthera leo" },
-    { id: "6", name: "Snow leopard", latinName: "Panthera uncia" },
-    { id: "7", name: "Tiger", latinName: "Panthera tigris" },
+const initialCats = [
+    { id: "1", name: "Cheetah", latinName: "Acinonyx jubatus", image: "./Cheetah.png" },
+    { id: "2", name: "Cougar", latinName: "Puma concolor", image: "./Cougar.png" },
+    { id: "3", name: "Jaguar", latinName: "Panthera onca", image: "./Jaguar.png" },
+    { id: "4", name: "Leopard", latinName: "Panthera pardus", image: "./Leopard.png" },
+    { id: "5", name: "Lion", latinName: "Panthera leo", image: "./Lion.png" },
+    { id: "6", name: "Snow Leopard", latinName: "Panthera uncia", image: "./Snow Leopard.png" },
+    { id: "7", name: "Tiger", latinName: "Panthera tigris", image: "./Tiger.png" },
 ];
 
-function mapArray(arr) {
-    return arr.map((cat) => (
-        <SingleCat
-            key={cat.id}
-            name={cat.name}
-            latin={cat.latinName}
-            image={`./cat${cat.id}.png`}
-        />
-    ));
-}
-
-const originalOrder = mapArray(cats);
-
-const reverseOrder = mapArray([...cats].reverse());
-
-const filterOrder = mapArray(
-    [...cats].filter((cat) => cat.latinName.toLocaleLowerCase().includes("panthera"))
-);
-
 function BigCats() {
-    const [order, setOrder] = useState(originalOrder);
+    const [cats, setCats] = useState(initialCats);
+    const [order, setOrder] = useState("original");
+    const getVisibleCats = () => {
+        if (order === "original") return cats;
+        if (order === "reversed") return [...cats].reverse();
+        if (order === "filtered")
+            return cats.filter((cat) => cat.latinName.toLowerCase().includes("panthera"));
+    };
     const handleOrder = () => {
-        let newOrder;
-        if (order === originalOrder) newOrder = reverseOrder;
-        else if (order === reverseOrder) newOrder = filterOrder;
-        else if (order === filterOrder) newOrder = originalOrder;
-        setOrder(newOrder);
+        if (order === "original") setOrder("reversed");
+        else if (order === "reversed") setOrder("filtered");
+        else setOrder("original");
+    };
+    const addCat = (newCat) => {
+        setCats(cats.push({ id: [...cats].length + 1, ...newCat }));
     };
 
     return (
@@ -46,8 +35,17 @@ function BigCats() {
             <button className='my-button' onClick={handleOrder}>
                 Sort
             </button>
-            <ul>{order}</ul>
-            <AddCatForm />
+            <ul>
+                {getVisibleCats().map((cat) => (
+                    <SingleCat
+                        key={cat.id}
+                        name={cat.name}
+                        latin={cat.latinName}
+                        image={cat.image}
+                    />
+                ))}
+            </ul>
+            <AddCatForm onSubmit={addCat} />
         </>
     );
 }

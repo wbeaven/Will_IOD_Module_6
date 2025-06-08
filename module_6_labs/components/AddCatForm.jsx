@@ -1,22 +1,20 @@
 import { useState } from "react";
 
-function AddCatForm() {
+function AddCatForm({ onSubmit }) {
     const [catName, setName] = useState("");
     const [catLatinName, setLatinName] = useState("");
     const [catImage, setImage] = useState();
 
-    const [submitResult, setSubmitResult] = useState("");
-
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        if (catName !== "" && catLatinName !== "" && catImage !== undefined) {
-            setSubmitResult("Added New Cat");
-        }
+        if (!catName || !catLatinName || !catImage) return;
+        onSubmit({ catName, catLatinName, catImage });
+        setName("");
+        setLatinName("");
     };
 
     return (
-        <div className='componentBox'>
+        <div>
             <form onSubmit={handleSubmit}>
                 <div className='formRow'>
                     <label>
@@ -52,8 +50,9 @@ function AddCatForm() {
                     </label>
                 </div>
                 <div className='formRow'>
-                    <button className='my-button'>Submit</button>
-                    <p>{submitResult}</p>
+                    <button className='my-button' type='submit'>
+                        Submit
+                    </button>
                 </div>
             </form>
         </div>
