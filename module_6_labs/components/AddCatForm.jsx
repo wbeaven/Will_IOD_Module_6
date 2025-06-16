@@ -1,14 +1,14 @@
 import { useState } from "react";
 
 function AddCatForm({ onSubmit }) {
-    const [catName, setName] = useState("");
-    const [catLatinName, setLatinName] = useState("");
+    const [name, setName] = useState("");
+    const [latinName, setLatinName] = useState("");
     const [catImage, setImage] = useState();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!catName || !catLatinName || !catImage) return;
-        onSubmit({ catName, catLatinName, catImage });
+        if (!name || !latinName || !catImage) return;
+        onSubmit({ name, latinName, catImage });
         setName("");
         setLatinName("");
     };
@@ -21,7 +21,7 @@ function AddCatForm({ onSubmit }) {
                         Name:
                         <input
                             type='text'
-                            value={catName}
+                            value={name}
                             name='catName'
                             onChange={(e) => setName(e.target.value)}
                         />
@@ -32,7 +32,7 @@ function AddCatForm({ onSubmit }) {
                         Latin Name:
                         <input
                             type='text'
-                            value={catLatinName}
+                            value={latinName}
                             name='catLatinName'
                             onChange={(e) => setLatinName(e.target.value)}
                         />

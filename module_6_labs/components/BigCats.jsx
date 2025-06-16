@@ -16,10 +16,12 @@ function BigCats() {
     const [cats, setCats] = useState(initialCats);
     const [order, setOrder] = useState("original");
     const getVisibleCats = () => {
+        console.log(cats);
         if (order === "original") return cats;
         if (order === "reversed") return [...cats].reverse();
         if (order === "filtered")
             return cats.filter((cat) => cat.latinName.toLowerCase().includes("panthera"));
+        return cats;
     };
     const handleOrder = () => {
         if (order === "original") setOrder("reversed");
@@ -27,7 +29,7 @@ function BigCats() {
         else setOrder("original");
     };
     const addCat = (newCat) => {
-        setCats(cats.push({ id: [...cats].length + 1, ...newCat }));
+        setCats([...cats, { id: cats.length + 1, ...newCat }]);
     };
 
     return (
